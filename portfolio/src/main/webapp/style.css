@@ -46,8 +46,19 @@ li a {
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
+	font-family: "Courier New", Courier, monospace;
 }
 
 li a:hover {
 	background-color: #32404d;
 }
+
+.col {
+	flex: 50%;
+	padding: 10px;
+}
+
+.row {
+	display: flex;
+}
+
