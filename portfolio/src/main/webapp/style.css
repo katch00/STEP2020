@@ -1,7 +1,7 @@
 #content {
 	margin-left: auto;
 	margin-right: auto;
-	width: 650px;
+	width: 80vw;
 }
 
 #greeting-container {
@@ -11,15 +11,43 @@
 h1 {
 	color: white;
 	text-align: center;
+	font-family:"Courier New", Courier, monospace;
+	font-size: 60px;
 }
 
 p {
 	color: white;
 	text-align: center;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 30px;
 }
 
 img {
 	display: block;
   	margin-left: auto;
 	margin-right: auto;
+}
+
+ul { 
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #51667b;
+}
+
+li {
+	float: left;
+}
+
+li a { 
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+li a:hover {
+	background-color: #32404d;
 }
