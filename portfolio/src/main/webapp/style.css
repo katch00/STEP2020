@@ -26,6 +26,13 @@ h1 {
 	font-size: 60px;
 }
 
+h2 {
+	color: white;
+	text-align: center;
+	font-family:"Courier New", Courier, monospace;
+	font-size: 45px;
+}
+
 p {
 	color: white;
 	text-align: center;
