@@ -5,49 +5,69 @@
 }
 
 #greeting-container {
-  margin-top: 20px;
+	color: white;
+	font-family:"Courier New", Courier, monospace;
+  font-size: 30px;
+	margin-left: auto;
+  margin-right: auto;
+	margin-top: 20px;
+	text-align: center;
+	width: 80vw;
+}
+
+#icons {
+	width = 200px;
 }
 
 h1 {
 	color: white;
+	font-family:"Courier New", Courier, monospace;
+  font-size: 60px;
+	text-align: center;
+}
+
+h2 {
+	color: white;
 	text-align: center;
 	font-family:"Courier New", Courier, monospace;
-	font-size: 60px;
+	font-size: 45px;
 }
 
 p {
 	color: white;
+	font-family:"Courier New", Courier, monospace;
+  font-size: 30px;
 	text-align: center;
-	font-family: "Courier New", Courier, monospace;
-	font-size: 30px;
 }
 
 img {
 	display: block;
-  	margin-left: auto;
+  margin-left: auto;
 	margin-right: auto;
+	width = 35vw;
 }
 
 ul { 
+	background-color: #51667b;
 	list-style-type: none;
 	margin: 0;
-	padding: 0;
 	overflow: hidden;
-	background-color: #51667b;
+	padding: 0;
 }
 
 li {
 	float: left;
 }
 
-li a { 
-	display: block;
+li a {
 	color: white;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
+	display: block;
 	font-family: "Courier New", Courier, monospace;
+	padding: 14px 16px;
+	text-align: center;
+	text-decoration: none;
 }
+
 
 li a:hover {
 	background-color: #32404d;
@@ -60,5 +80,29 @@ li a:hover {
 
 .row {
 	display: flex;
+}
+
+.center {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.button {
+	background-color: #51667b;
+	border-radius: 14px;
+  color: white;
+  cursor: pointer;
+	font-family: "Courier New", Courier, monospace;
+  font-size: 24px;
+	margin: 4px 2px;
+  padding: 10px 28px; 
+  text-align: center;
+  text-decoration: none;
+  transition-duration: 0.4s;
+}
+
+.button:hover {
+	background-color: #32404d;
 }
 
