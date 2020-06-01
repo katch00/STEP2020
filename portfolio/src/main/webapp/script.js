@@ -40,4 +40,8 @@ function randomPik() {
   imageContainer.appendChild(imgElement);
 }
 
-
+function getMessage() {
+  fetch('/data').then(response => response.text()).then((message) => {
+    document.getElementById('message-container').innerText = message;
+  });
+}
