@@ -41,7 +41,7 @@ function randomPik() {
 }
 
 function getMessage() {
-  fetch('/data').then(response => response.text()).then((message) => {
+  fetch('/comments').then(response => response.json()).then((message) => {
     document.getElementById('message-container').innerText = message;
   });
 }
