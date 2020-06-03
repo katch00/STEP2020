@@ -14,6 +14,12 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.lang.String;
@@ -27,11 +33,20 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/comments")
 public class DataServlet extends HttpServlet {
 
-  private ArrayList<String> messages = new ArrayList<String>();
-
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    //ArrayList<String> messages = new ArrayList<String>();
+    Query query = new Query("comment");//.addsort("timestamp", SortDirection.DESCENDING);
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+
+    ArrayList<String> messages = new ArrayList<String>();
+    for (Entity entity : results.asIterable()) {
+      long id = entity.getKey().getId();
+      String mssg = (String) entity.getProperty("comment");
+      messages.add(mssg);
+    }
+
     String json = convertToJson(messages);
 
     response.setContentType("application/json;");
@@ -47,11 +62,15 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String comment = getParameter(request, "text-input", "");
-    //ArrayList<String> messages = new ArrayList<String>();
-    messages.add(comment);
-    String json = convertToJson(messages);
-    response.setContentType("application/json;");
-    response.getWriter().println(json);
+    long timestamp = System.currentTimeMillis();
+
+    Entity mssgEntity = new Entity("comment");
+    mssgEntity.setProperty("comment", comment);
+    mssgEntity.setProperty("timestamp", timestamp);
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(mssgEntity);
+
     response.sendRedirect("/index.html");
   }
 

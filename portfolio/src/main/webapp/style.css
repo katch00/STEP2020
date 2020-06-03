@@ -7,22 +7,29 @@
 #greeting-container {
 	color: white;
 	font-family:"Courier New", Courier, monospace;
-  font-size: 30px;
+        font-size: 30px;
 	margin-left: auto;
-  margin-right: auto;
+        margin-right: auto;
 	margin-top: 20px;
 	text-align: center;
 	width: 80vw;
 }
 
-#icons {
-	width = 200px;
+#message-container {
+        color: white;
+        font-family:"Courier New", Courier, monospace;
+        font-size: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        text-align: center;
+        width: 80vw;
 }
 
 h1 {
 	color: white;
 	font-family:"Courier New", Courier, monospace;
-  font-size: 60px;
+        font-size: 60px;
 	text-align: center;
 }
 
@@ -36,13 +43,13 @@ h2 {
 p {
 	color: white;
 	font-family:"Courier New", Courier, monospace;
-  font-size: 30px;
+        font-size: 30px;
 	text-align: center;
 }
 
 img {
 	display: block;
-  margin-left: auto;
+        margin-left: auto;
 	margin-right: auto;
 	width = 35vw;
 }
