@@ -45,3 +45,9 @@ function getMessage() {
     document.getElementById('message-container').innerText = message;
   });
 }
+
+function createListElement(text) {
+   const liElement = document.createElement('li');
+   liElement.innerText = text;
+   return liElement;
+}
