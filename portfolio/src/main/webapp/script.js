@@ -83,7 +83,7 @@ function deleteComment(comment) {
 }
 
 /**
- * Creates and adds a chart to the page 
+ * Creates and adds a hardcoded piechart to the page 
  */
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawChart);
@@ -103,7 +103,7 @@ function drawChart() {
 
   var options = {
     'title': 'Top 10 Favorite Game Genres',
-    //is3D: true,
+    is3D: true,
     'width':500,
     'height':400
   };
@@ -113,3 +113,28 @@ function drawChart() {
 
 } 
 
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawGameChart);
+
+/** Fetches game data and uses it to create a chart. */
+function drawGameChart() {
+  fetch('/game-data').then(response => response.json())
+  .then((gameVotes) => {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Game');
+    data.addColumn('number', 'Votes');
+    Object.keys(gameVotes).forEach((game) => {
+      data.addRow([game, gameVotes[game]]);
+    });
+
+    var options = {
+      'title': 'Favorite Games',
+      'width':700,
+      'height':600
+    };
+
+    var chart = new google.visualization.ColumnChart(
+        document.getElementById('gamesChart-container'));
+    chart.draw(data, options);
+  });
+}
