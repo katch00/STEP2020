@@ -12,18 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
+import com.google.sps.servlets.Comment;
 import java.io.IOException;
 import java.lang.String;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,25 +41,37 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("comment");//.addsort("timestamp", SortDirection.DESCENDING);
-
+    Query query = new Query("comment").addSort("timestamp", SortDirection.DESCENDING);
+   
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
+    //List<Entity> results = getComments(); 
 
-    ArrayList<String> messages = new ArrayList<String>();
+    List<Comment> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
       long id = entity.getKey().getId();
       String mssg = (String) entity.getProperty("comment");
-      messages.add(mssg);
+      long timestamp = (long) entity.getProperty("timestamp");
+      
+      Comment comment = new Comment(id, mssg, timestamp);
+      comments.add(comment);
     }
 
-    String json = convertToJson(messages);
+    String json = convertToJson(comments);
 
     response.setContentType("application/json;");
     response.getWriter().println(json);
   }
 
-  public String convertToJson(ArrayList<String> arr) {
+  public List<Entity> getComments() {
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    Query query = new Query("comment").addSort("timestamp", SortDirection.DESCENDING);
+
+    PreparedQuery results = datastore.prepare(query);
+    return results.asList(FetchOptions.Builder.withLimit(5));
+  }
+  
+  public String convertToJson(List<Comment> arr) {
     Gson gson = new Gson();
     String json = gson.toJson(arr);
     return json;

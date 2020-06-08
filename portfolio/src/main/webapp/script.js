@@ -27,6 +27,9 @@ function addRandomGreeting() {
   greetingContainer.innerText = greeting;
 }
 
+/**
+ * Gets a random surprised pikachu meme and displays on page
+ */
 function randomPik() {
   const imageIndex = Math.floor(Math.random() * 6) + 1;
   const imgUrl = 'images/suprisedimgs/sup' + imageIndex + '.jpg';
@@ -40,14 +43,73 @@ function randomPik() {
   imageContainer.appendChild(imgElement);
 }
 
+
 function getMessage() {
-  fetch('/comments').then(response => response.json()).then((message) => {
-    document.getElementById('message-container').innerText = message;
+  fetch('/comments').then(response => response.json()).then((messages) => {
+    const cmmtListEl = document.getElementById('message-container');
+    messages.forEach((message) => {
+        cmmtListEl.appendChild(createCommentElement(message));
+    })
   });
+
 }
 
-function createListElement(text) {
-   const liElement = document.createElement('li');
-   liElement.innerText = text;
-   return liElement;
+function createCommentElement(comment) {
+  const commentElement = document.createElement('li');
+  commentElement.className = 'comment';
+
+  const titleElement = document.createElement('span');
+  titleElement.innerText = comment.message;
+
+  const deleteButtonElement = document.createElement('button');
+  deleteButtonElement.innerText = 'Delete';
+  deleteButtonElement.className = "button";
+  deleteButtonElement.addEventListener('click', () => {
+    deleteComment(comment);
+
+    // Remove the task from the DOM.
+    commentElement.remove(); 
+  });
+
+  commentElement.appendChild(titleElement);
+  commentElement.appendChild(deleteButtonElement);
+  return commentElement;
 }
+
+function deleteComment(comment) {
+  const params = new URLSearchParams();
+  params.append('id', comment.id);
+  fetch('/delete-data', {method: 'POST', body: params});
+}
+
+/**
+ * Creates and adds a chart to the page 
+ */
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'Genre');
+  data.addColumn('number', 'Count');
+  
+    data.addRows([
+      //['Genre', 'Number played'],
+      ['Sci-Fi', 3],
+      ['Fantasy', 3],
+      ['Simulation', 2],
+      ['Mixed/Other', 2]
+    ]);
+
+  var options = {
+    'title': 'Top 10 Favorite Game Genres',
+    //is3D: true,
+    'width':500,
+    'height':400
+  };
+
+  var chart = new google.visualization.PieChart(document.getElementById('chart-container'));
+  chart.draw(data, options);
+
+} 
+

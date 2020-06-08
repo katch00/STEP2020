@@ -8,11 +8,12 @@
   </head>
   <body onload="getMessage()" bgcolor = "#66819c">
     <nav id="navbar">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="lucygallery.html">Lucy Gallery</a></li>
-        <li><a href="proj.html">Projects</a></li>
-        <li><a href="surprise.html">Surprise</a></li>
+      <ul id="ulNav">
+        <li id="linav"><a href="index.html">Home</a></li>
+        <li id="linav"><a href="lucygallery.html">Lucy Gallery</a></li>
+        <li id="linav"><a href="proj.html">Projects</a></li>
+        <li id="linav"><a href="charts.html">Cool Charts</a></li>
+        <li id="linav"><a href="surprise.html">Surprise</a></li>
       </ul>
     </nav>
     <div id="content">
@@ -35,12 +36,12 @@
 	<div class="row" class="icon">
 	  <div class="col">
 	    <a href="https://github.com/katch00">
-	      <img src="images/git.jpg">
+	      <img src="images/git.jpg" class="icon">
 	    </a>
 	  </div>
 	  <div class="col">
 	    <a href="https://www.linkedin.com/in/stroupe15/">
-	      <img src="images/linkedin.jpg">
+	      <img src="images/linkedin.jpg" class="icon">
 	    </a>
 	  </div>
         </div>
@@ -49,12 +50,13 @@
 	  <button class="button" onclick="addRandomGreeting()">Hello</button>
 	</div>
       <div id="greeting-container"></div>
+      <p>Enter Comments Here:</p>
+      <br>
       <form action="/comments" method="POST" class="center" >
-        <p>Enter your comments here:</p>
-        <textarea name="text-input">Comments go here!</textarea>
+        <input type="text" id="commentBox" name="text-input" placeholder="Comments go here!" class="center">
         <input type="submit" class="button" />
       </form>
-      <div id="message-container"></div>
+      <ul id="message-container"></ul>
     </div>
   </body>
 </html>
