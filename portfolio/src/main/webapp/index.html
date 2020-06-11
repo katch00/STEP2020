@@ -7,28 +7,47 @@
     <script src="script.js"></script>
   </head>
   <body bgcolor = "#66819c">
-    <div id="content">
-      <h1>My Portfolio</h1>
-	<p>This is my portfolio.</p>
-	<p> My name is Natalia Stroupe. </p>
-	<p> I am going into my third year of schooling at the Illinois Institute of Technology. I am studying Computer Science with a specialization in cyber-security. My school offers a special program where I can add an extra year onto my studies and can graduate with a bachelors and masters at the same time! Because I can graduate a year early, I will be able to graduate in 2022 with both degrees! <p>
-	<p> I really like cats :D </p>
-	<img src="images/IMG_1733.jpg" height="500">
-	<p> Here are links to some of my accounts! </p>
-	<a href="https://github.com/katch00">
-	   <img src="images/git.jpg" width="150">
-	</a>
-	<a href="https://www.linkedin.com/in/stroupe15/">
-	   <img src="images/linkedin.jpg" width="150">
-	</a>
-	<p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
+    <nav id="navbar">
       <ul>
-	<li><a href="#home">Home</a></li>
-	<li><a href="#lucy">Lucy Gallery</a></li>
-	<li><a href="#projects">Projects</a></li>
-	<li><a href="#suprise">Suprise</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="lucygallery.html">Lucy Gallery</a></li>
+        <li><a href="proj.html">Projects</a></li>
+        <li><a href="surprise.html">Surprise</a></li>
       </ul>
+    </nav>
+    <div id="content">
+      <h1>Home</h1>
+	<p>This is my portfolio.</p>
+	<p>My name is Natalia Stroupe.</p>
+	<p>I am going into my third year of schooling at the Illinois Institute of Technology.
+           I am studying Computer Science with a specialization in cyber-security.
+           My school offers a special program where I can add an extra year onto my studies and can graduate
+           with a bachelors and masters at the same time! Because I can graduate a year early,
+           I will be able to graduate in 2022 with both degrees!</p>
+	<p>I really like cats :D This is my cat Lucy!</p>
+	<img src="images/IMG_1733.jpg" height="750px">
+    <h1>Facts About Me!</h1>
+	    <p>I enjoy playing videogames and Dnd</p>
+      <p>I have five tattoos - two cats, a wolf, a D20, and a UFO!</p>
+      <p>I have been dying my hair unnatural colors since the eighth grade</p>
+      <p>I am active in many student orgs, some include: PRISM, Cyber-hawks Security, WiCys, ACM-W, and many more!</p>
+	<p> Here are links to some of my accounts! </p>
+	<div class="row" class="icon">
+	  <div class="col">
+	    <a href="https://github.com/katch00">
+	      <img src="images/git.jpg">
+	    </a>
+	  </div>
+	  <div class="col">
+	    <a href="https://www.linkedin.com/in/stroupe15/">
+	      <img src="images/linkedin.jpg">
+	    </a>
+	  </div>
+        </div>
+	<p>Click here to get a random message:</p>
+	<div class="center">     
+	 <button class="button" onclick="addRandomGreeting()">Hello</button>
+	</div>
       <div id="greeting-container"></div>
     </div>
   </body>

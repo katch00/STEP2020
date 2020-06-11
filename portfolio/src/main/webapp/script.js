@@ -26,3 +26,18 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+
+function randomPik() {
+  const imageIndex = Math.floor(Math.random() * 6) + 1;
+  const imgUrl = 'images/suprisedimgs/sup' + imageIndex + '.jpg';
+
+  const imgElement = document.createElement('img');
+  imgElement.src = imgUrl;
+
+  const imageContainer = document.getElementById('random-pik-container');
+  // Remove the previous image.
+  imageContainer.innerHTML = '';
+  imageContainer.appendChild(imgElement);
+}
+
+
