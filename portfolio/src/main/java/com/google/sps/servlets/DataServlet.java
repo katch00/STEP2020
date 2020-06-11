@@ -15,18 +15,19 @@
 
 package com.google.sps.servlets;
 
-import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gson.Gson;
 import com.google.sps.servlets.Comment;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/comments")
 public class DataServlet extends HttpServlet {
 
+  // Gets comments from datastore and puts them into an array list, to be used by getMessage() funtion
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query("comment").addSort("timestamp", SortDirection.DESCENDING);
@@ -52,15 +54,17 @@ public class DataServlet extends HttpServlet {
       long id = entity.getKey().getId();
       String mssg = (String) entity.getProperty("comment");
       long timestamp = (long) entity.getProperty("timestamp");
+      String userEmail = (String) entity.getProperty("user");
+      String fullComment = userEmail + ": " + mssg;
       
-      Comment comment = new Comment(id, mssg, timestamp);
+      Comment comment = new Comment(id, fullComment, timestamp);
       comments.add(comment);
     }
 
     String json = convertToJson(comments);
 
     response.setContentType("application/json;");
-    response.getWriter().println(json);
+    response.getWriter().println(json); 
   }
 
   public List<Entity> getComments() {
@@ -77,14 +81,24 @@ public class DataServlet extends HttpServlet {
     return json;
   }
 
+  // Allows users to create comments to be stored in datastore, if they are logged in
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    UserService userService = UserServiceFactory.getUserService();
+
+    if (!userService.isUserLoggedIn()) {
+        response.sendRedirect("/login");
+        return;
+    }
+    
     String comment = getParameter(request, "text-input", "");
     long timestamp = System.currentTimeMillis();
+    String userName = getUserNickname(userService.getCurrentUser().getUserId());
 
     Entity mssgEntity = new Entity("comment");
     mssgEntity.setProperty("comment", comment);
     mssgEntity.setProperty("timestamp", timestamp);
+    mssgEntity.setProperty("user", userName);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(mssgEntity);
@@ -100,4 +114,17 @@ public class DataServlet extends HttpServlet {
     return value;
   }
 
+  private String getUserNickname(String id) {
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    Query query =
+      new Query("UserInfo")
+            .setFilter(new Query.FilterPredicate("id", Query.FilterOperator.EQUAL, id));
+    PreparedQuery results = datastore.prepare(query);
+    Entity entity = results.asSingleEntity();
+    if (entity == null) {
+      return null;
+    }
+    String nickname = (String) entity.getProperty("nickname");
+    return nickname;
+  }
 }

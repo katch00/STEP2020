@@ -54,6 +54,7 @@ function getMessage() {
 
 }
 
+
 function createCommentElement(comment) {
   const commentElement = document.createElement('li');
   commentElement.className = 'comment';
