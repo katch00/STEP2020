@@ -35,7 +35,7 @@ public class GameDataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String game = request.getParameter("game");
-    int currentVotes = gameVotes.containsKey(game) ? gameVotes.get(game) : 0;
+    int currentVotes = gameVotes.getOrDefault(game, 0);
     gameVotes.put(game, currentVotes + 1);
 
     response.sendRedirect("/charts.html");
