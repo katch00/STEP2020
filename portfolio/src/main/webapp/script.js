@@ -27,6 +27,9 @@ function addRandomGreeting() {
   greetingContainer.innerText = greeting;
 }
 
+/**
+ * Gets a random surprised pikachu meme and displays on page
+ */
 function randomPik() {
   const imageIndex = Math.floor(Math.random() * 6) + 1;
   const imgUrl = 'images/suprisedimgs/sup' + imageIndex + '.jpg';
@@ -41,3 +44,41 @@ function randomPik() {
 }
 
 
+function getMessage() {
+  fetch('/comments').then(response => response.json()).then((messages) => {
+    const cmmtListEl = document.getElementById('message-container');
+    messages.forEach((message) => {
+        cmmtListEl.appendChild(createCommentElement(message));
+    })
+  });
+
+}
+
+
+function createCommentElement(comment) {
+  const commentElement = document.createElement('li');
+  commentElement.className = 'comment';
+
+  const titleElement = document.createElement('span');
+  titleElement.innerText = comment.message;
+
+  const deleteButtonElement = document.createElement('button');
+  deleteButtonElement.innerText = 'Delete';
+  deleteButtonElement.className = "button";
+  deleteButtonElement.addEventListener('click', () => {
+    deleteComment(comment);
+
+    // Remove the task from the DOM.
+    commentElement.remove(); 
+  });
+
+  commentElement.appendChild(titleElement);
+  commentElement.appendChild(deleteButtonElement);
+  return commentElement;
+}
+
+function deleteComment(comment) {
+  const params = new URLSearchParams();
+  params.append('id', comment.id);
+  fetch('/delete-data', {method: 'POST', body: params});
+}

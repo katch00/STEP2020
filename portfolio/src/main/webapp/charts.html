@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="charts.js"></script>
+  </head>
+  <body bgcolor = "#66819c">
+    <nav id="navbar">
+      <ul id="ulNav">
+        <li id="linav"><a href="index.html">Home</a></li>
+        <li id="linav"><a href="lucygallery.html">Lucy Gallery</a></li>
+        <li id="linav"><a href="proj.html">Projects</a></li>
+        <li id="linav"><a href="charts.html">Cool Charts</a></li>
+        <li id="linav"><a href="maps.html">Maperinos</a></li>
+        <li id="linav"><a href="surprise.html">Surprise</a></li>
+      </ul>
+    </nav>
+    <h1>Some Fun Charts!</h1>
+    <p>Here is a graph dealing with some of my favorite games' genres!</p> 
+    <div id="chart-container" class="center"></div>
+    <p>Pick a favorite from some of mine and see how others feel!</p>
+    <div id="gamesChart-container" class="center"></div>
+    <p>Vote here:</p>
+    <form action="game-data" method="POST" class="center">
+      <select name="game">
+        <option value="Animal Crossing">Animal Crossing</option>
+        <option value="Assassins Creed: Odyssey">Assassins Creed: Odyssey</option>
+        <option value="Cytus II">Cytus II</option>
+        <option value="Detroit: Become Human">Detroit: Become Human</option>
+        <option value="Dragon Age">Dragon Age: Inquisition</option>
+        <option value="FFXV">Final Fantasy XV</option>
+        <option value="Horizon Zero Dawn">Horizon Zero Dawn</option>
+        <option value="Stardew Valley">Stardew Valley</option>
+        <option value="TES: Oblivion">TES: Oblivion</option>
+        <option value="Watchdogs 2">Watchdogs 2</options>
+        <option value="None">None of these! So terrible</option>
+      </select>
+      <button class="button">Submit</button>
+    </form>
+  </body>
+</html>
+    
