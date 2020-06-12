@@ -7,22 +7,29 @@
 #greeting-container {
 	color: white;
 	font-family:"Courier New", Courier, monospace;
-  font-size: 30px;
+        font-size: 30px;
 	margin-left: auto;
-  margin-right: auto;
+        margin-right: auto;
 	margin-top: 20px;
 	text-align: center;
 	width: 80vw;
 }
 
-#icons {
-	width = 200px;
+#message-container {
+        color: white;
+        font-family:"Courier New", Courier, monospace;
+        font-size: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        text-align: center;
+        width: 80vw;
 }
 
 h1 {
 	color: white;
 	font-family:"Courier New", Courier, monospace;
-  font-size: 60px;
+        font-size: 60px;
 	text-align: center;
 }
 
@@ -36,13 +43,13 @@ h2 {
 p {
 	color: white;
 	font-family:"Courier New", Courier, monospace;
-  font-size: 30px;
+        font-size: 30px;
 	text-align: center;
 }
 
 img {
 	display: block;
-  margin-left: auto;
+        margin-left: auto;
 	margin-right: auto;
 	width = 35vw;
 }
@@ -91,15 +98,15 @@ li a:hover {
 .button {
 	background-color: #51667b;
 	border-radius: 14px;
-  color: white;
-  cursor: pointer;
+        color: white;
+        cursor: pointer;
 	font-family: "Courier New", Courier, monospace;
-  font-size: 24px;
+        font-size: 24px;
 	margin: 4px 2px;
-  padding: 10px 28px; 
-  text-align: center;
-  text-decoration: none;
-  transition-duration: 0.4s;
+        padding: 10px 28px; 
+        text-align: center;
+        text-decoration: none;
+        transition-duration: 0.4s;
 }
 
 .button:hover {
