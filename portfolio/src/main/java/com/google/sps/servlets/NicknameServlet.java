@@ -32,7 +32,7 @@ public class NicknameServlet extends HttpServlet {
 
     UserService userService = UserServiceFactory.getUserService();
     if (userService.isUserLoggedIn()) {
-      String nickname = GetNickname.getUserNickname(userService.getCurrentUser().getUserId());
+      String nickname = UserStore.getUserNickname(userService.getCurrentUser().getUserId());
       out.println("<p>Set your nickname here:</p>");
       out.println("<form method=\"POST\" action=\"/nickname\">");
       out.println("<input name=\"nickname\" value=\"" + nickname + "\" />");

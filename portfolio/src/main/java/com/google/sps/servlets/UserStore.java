@@ -7,7 +7,7 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 
 
-public class GetNickname {
+public class UserStore {
   
   /**
    * Returns the nickname of the user with id, or empty String if the user has not set a nickname.

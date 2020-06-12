@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
     UserService userService = UserServiceFactory.getUserService();
     if (userService.isUserLoggedIn()) {
       // User has no nickname
-      String nickname = GetNickname.getUserNickname(userService.getCurrentUser().getUserId());
+      String nickname = UserStore.getUserNickname(userService.getCurrentUser().getUserId());
       if (nickname == null) {
         response.sendRedirect("/nickname");
         return;
@@ -50,12 +50,12 @@ public class LoginServlet extends HttpServlet {
       response.getWriter().println("</div></body>");
       response.getWriter().println("</body>");
     } else {
-    String urlToRedirectToAfterUserLogsIn = "/login";
-    String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
-    response.getWriter().println("<link rel=\"stylesheet\" href=\"style.css\">");
-    response.getWriter().println("<body bgcolor=\"#66819c\">");
-    response.getWriter().println("<p>Hello stranger.</p>");
-    response.getWriter().println("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");
+      String urlToRedirectToAfterUserLogsIn = "/login";
+      String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
+      response.getWriter().println("<link rel=\"stylesheet\" href=\"style.css\">");
+      response.getWriter().println("<body bgcolor=\"#66819c\">");
+      response.getWriter().println("<p>Hello stranger.</p>");
+      response.getWriter().println("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");
     }
 
   }
