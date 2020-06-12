@@ -14,9 +14,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Servlet used to allow user to set a nickname 
+ */ 
 @WebServlet("/nickname")
 public class NicknameServlet extends HttpServlet {
-
+  
+  /**
+   * If the user is logged in, lets them set their nickname.
+   * If user is not logged in, sends them to login first.
+   */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html");
@@ -38,6 +45,9 @@ public class NicknameServlet extends HttpServlet {
     }
   }
 
+  /**
+   * When user is logged in, this saves their nickname to the datastore for future use.
+   */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     UserService userService = UserServiceFactory.getUserService();

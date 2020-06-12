@@ -17,10 +17,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+/**
+ * Implemention of the Users API for loggin in and setting a nickname
+ */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
   
+  /**
+   * Checks if user is logged in. If not, redirects user to log in. If yes, checks if user has a nickname
+   * If user has no nickname, redirects uder to set nickname
+   * Also allows user to loggout if they are logged in and have a nickname set
+   */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html");
