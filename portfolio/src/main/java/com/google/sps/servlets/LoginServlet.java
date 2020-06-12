@@ -42,13 +42,13 @@ public class LoginServlet extends HttpServlet {
       response.getWriter().println("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.</p>");
       response.getWriter().println("</div></body>");
       response.getWriter().println("</body>");
-      } else {
-      String urlToRedirectToAfterUserLogsIn = "/login";
-      String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
-      response.getWriter().println("<link rel=\"stylesheet\" href=\"style.css\">");
-      response.getWriter().println("<body bgcolor=\"#66819c\">");
-      response.getWriter().println("<p>Hello stranger.</p>");
-      response.getWriter().println("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");
+    } else {
+    String urlToRedirectToAfterUserLogsIn = "/login";
+    String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
+    response.getWriter().println("<link rel=\"stylesheet\" href=\"style.css\">");
+    response.getWriter().println("<body bgcolor=\"#66819c\">");
+    response.getWriter().println("<p>Hello stranger.</p>");
+    response.getWriter().println("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");
     }
 
   }

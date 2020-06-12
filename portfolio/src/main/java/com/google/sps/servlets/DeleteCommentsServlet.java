@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/** 
+ * Deletes comments from datastore when requested by users by the comment ID
+ */
 @WebServlet("/delete-data")
 public class DeleteCommentsServlet extends HttpServlet {
-    // delete comments from datastore
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         long id = Long.parseLong(request.getParameter("id"));
