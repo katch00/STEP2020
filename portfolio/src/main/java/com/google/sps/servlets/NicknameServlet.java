@@ -32,7 +32,7 @@ public class NicknameServlet extends HttpServlet {
 
     UserService userService = UserServiceFactory.getUserService();
     if (userService.isUserLoggedIn()) {
-      String nickname = getUserNickname(userService.getCurrentUser().getUserId());
+      String nickname = GetNickname.getUserNickname(userService.getCurrentUser().getUserId());
       out.println("<p>Set your nickname here:</p>");
       out.println("<form method=\"POST\" action=\"/nickname\">");
       out.println("<input name=\"nickname\" value=\"" + nickname + "\" />");
@@ -66,22 +66,5 @@ public class NicknameServlet extends HttpServlet {
     datastore.put(entity);
 
     response.sendRedirect("/index.html");
-  }
-
-  /**
-   * Returns the nickname of the user with id, or empty String if the user has not set a nickname.
-   */
-  private String getUserNickname(String id) {
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    Query query =
-        new Query("UserInfo")
-            .setFilter(new Query.FilterPredicate("id", Query.FilterOperator.EQUAL, id));
-    PreparedQuery results = datastore.prepare(query);
-    Entity entity = results.asSingleEntity();
-    if (entity == null) {
-      return "";
-    }
-    String nickname = (String) entity.getProperty("nickname");
-    return nickname;
   }
 }
